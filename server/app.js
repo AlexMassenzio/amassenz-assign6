@@ -31,6 +31,8 @@ chat.on("connection", socket => {
   });
 
   socket.on("send-message", msg => {
+    console.log(msg.usr + ": " + msg.text + " - " + msg.search);
+
     chat.to(msg.room).emit("receive-message", msg.text);
   });
 

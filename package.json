@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node ./server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +19,6 @@
   "homepage": "https://github.com/AlexMassenzio/amassenz-assign6#readme",
   "dependencies": {
     "express": "^4.16.3",
-    "socket.io": "^2.1.0"
+    "socket.io": "^1.7.3"
   }
 }
