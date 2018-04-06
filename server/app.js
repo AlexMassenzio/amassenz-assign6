@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const redisConnection = require("./redis-connection");
 const http = require("http").Server(app);
 
 const io = require("socket.io")(http);
@@ -32,11 +33,15 @@ chat.on("connection", socket => {
 
   socket.on("send-message", msg => {
     console.log(msg.usr + ": " + msg.text + " - " + msg.search);
-
-    chat.to(msg.room).emit("receive-message", msg.text);
+    redisConnection.emit("research", {msgData: msg});
   });
 
   socket.emit("request-credentials");
+});
+
+redisConnection.on("researchResponse", (data, channel) => {
+  console.log(data.results.text);
+  chat.to(data.results.room).emit("receive-message", data.results);
 });
 
 http.listen(3000, () => {
